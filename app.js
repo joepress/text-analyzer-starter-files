@@ -1,9 +1,9 @@
 function getWordCount(words){
 	var getWordCount = {};
 	for(var i =0; i < words.length;i++){
-		wordCount[words[i]]++;
+		getWordCount[words[i]]++;
 	}
-	return wordCount.length;
+	return getWordCount.length;
 }
 
 function getUniqueWordCount(words){
@@ -27,7 +27,7 @@ function getAvgWordlength(words){
 	var totalSentences = 
 }*/
 
-function analyzeText(text){
+function analyzeText(words){
 	
 	var wordCount = getWordCount(words);
 	
