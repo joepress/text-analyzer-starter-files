@@ -44,7 +44,7 @@ function analyzeText(text){
 
 $(document).ready(function(){
 	$('.js-textForm').submit(function(event){
-	 $()
+		event.preventDefault();
 	 var userText = $('#user-text').val();
 	 analyzeText(userText);
 		});
