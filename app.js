@@ -17,13 +17,12 @@ function getUniqueWordCount(words){
 }
 	
 function getAvgWordLength(words){
-	var totalLength = words.join("").length;
+	var totalLength = words.join('').length;
 	return (totalLength / words.length).toFixed(2);
 }
 
 function getTokens(rawString) {
-  // returns an alphabetically sorted list of words, removing punctuation
-  // characters
+
   return rawString.toLowerCase().split(/[ ,!.";:-]+/).filter(Boolean).sort();
 }
 
@@ -33,7 +32,6 @@ function getSentenceLength(string){
 
 function getAvgSentenceLength(string){
 	var numOfSentence = getSentenceLength(string);
-	//var wordCount = getWords(string.length);
 	return  numOfSentence.toFixed(2);
 }
 
