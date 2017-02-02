@@ -1,4 +1,4 @@
-function getWordCount(words){
+function getWords(words){
 	var getWordCount = {};
 	for(var i =0; i < words.length;i++){
 		getWordCount[words[i]]++;
@@ -7,37 +7,50 @@ function getWordCount(words){
 }
 
 function getUniqueWordCount(words){
-	var uniqueWord = {};
-	for (var i = 0; i < words.length;i++){
-		if (words[i] in uniqueWord){
-			uniqueWord[words[i]]++;
-	}else{
-		uniqueWord[words[i]] = 1;
-	}
+	var uniqueWords = [];
+  for (var i=0; i <words.length; i++) {
+    if (uniqueWords.indexOf(words[i]) === -1) {
+      uniqueWords.push(words[i]);
+    }
+  }
+  return uniqueWords.length;
 }
-return uniqueWord.length;
-}
-
-function getAvgWordlength(words){
-	var totalLength = words.join('').length;
-	return (totalLength / words.length);
+	
+function getAvgWordLength(words){
+	var totalLength = words.join("").length;
+	return (totalLength / words.length).toFixed(2);
 }
 
-/*function getAvgSentenceLength(words){
-	var totalSentences = 
-}*/
+function getTokens(rawString) {
+  // returns an alphabetically sorted list of words, removing punctuation
+  // characters
+  return rawString.toLowerCase().split(/[ ,!.";:-]+/).filter(Boolean).sort();
+}
+
+function getSentenceLength(string){
+	return string.toString().toLowerCase().split(/[.,?!-]+/).filter(Boolean).sort().length;
+}
+
+function getAvgSentenceLength(string){
+	var numOfSentence = getSentenceLength(string);
+	//var wordCount = getWords(string.length);
+	return  numOfSentence.toFixed(2);
+}
+
+
 
 function analyzeText(words){
 	
-	var wordCount = getWordCount(words);
-	
 	var uniqueWordCount = getUniqueWordCount(words);
 	
-	var avgWordLength = GetAvgWordLength(words);
+	var avgWordLength = getAvgWordLength(words);
 	
-	$('.js-wordCount').append(wordCount);
+	var avgSentenceLength = getAvgSentenceLength(words);
+	
+	$('.js-wordCount').append(words.length);
 	$('.js-uniqueWord').append(uniqueWordCount);
-	$('.js-avgWordLength').append(avgWordLength);
+	$('.js-avgWordLength').append(avgWordLength + " characters") ;
+	$('.js-avgSentenceLength').append(avgSentenceLength + " words")
 	$('.text-report').removeClass('hidden');
 }
 
@@ -46,8 +59,37 @@ $(document).ready(function(){
 	$('.js-textForm').submit(function(event){
 		event.preventDefault();
 	 var userText = $('#user-text').val();
-	 analyzeText(userText);
+	 analyzeText(getTokens(userText));
 		});
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
