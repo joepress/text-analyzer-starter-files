@@ -26,12 +26,18 @@ function getTokens(rawString) {
   return rawString.toLowerCase().split(/[ ,!.";:-]+/).filter(Boolean).sort();
 }
 
-function getSentenceLength(string){
-	return string.toString().toLowerCase().split(/[.,?!-]+/).filter(Boolean).sort().length;
-}
+function getSentenceLength(rawText)
+{ var sentences = rawText.toString().toLowerCase().split(/[.?!]+/).filter(Boolean).sort();
+ var totalWords = 0; 
+ sentences.forEach(function(item){ 
+	totalWords += getTokens(item).length; 
+	});
+ return totalWords / sentences.length  ; 
+ }
 
-function getAvgSentenceLength(string){
-	var numOfSentence = getSentenceLength(string);
+
+function getAvgSentenceLength(text){
+	var numOfSentence = getSentenceLength(text);
 	return  numOfSentence.toFixed(2);
 }
 
@@ -43,12 +49,12 @@ function analyzeText(words){
 	
 	var avgWordLength = getAvgWordLength(words);
 	
-	var avgSentenceLength = getAvgSentenceLength(words);
+	var avgSentenceLength = getAvgSentenceLength($('#user-text').val());
 	
-	$('.js-wordCount').append(words.length);
-	$('.js-uniqueWord').append(uniqueWordCount);
-	$('.js-avgWordLength').append(avgWordLength + " characters") ;
-	$('.js-avgSentenceLength').append(avgSentenceLength + " words")
+	$('.js-wordCount').html(words.length);
+	$('.js-uniqueWord').html(uniqueWordCount);
+	$('.js-avgWordLength').html(avgWordLength + " characters") ;
+	$('.js-avgSentenceLength').html(avgSentenceLength + " words")
 	$('.text-report').removeClass('hidden');
 }
 
